@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User.js');
+const Wallet = require('../models/Wallet.js');
 const {v4 : uuidv4} = require('uuid');
 
 router.post('/signIn', (req, res) => {
@@ -39,6 +40,21 @@ router.post('/register', (req, res) => {
 		licenseNo: req.body.licenseNo
 	})
 	.then(response => {
+		Wallet.create({
+			userId: userId,
+			username: req.body.username,
+			balance: 100
+		})
+		.catch(err => {
+			console.log(err);
+			res
+			.status(400)
+			.json({
+				userId: null,
+				message: "Error has Occured in Adding Balance to User"
+			});
+		})
+
 		res
 		.status(200)
 		.json({

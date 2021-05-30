@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const db = () => {
 	mongoose.connect(
 		"mongodb+srv://satwik:Satwik@esaproject.wpgbs.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
-		{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true},
+		{useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true, useFindAndModify: false},
 	)
 	.then(console.log('Connected to Database'))
 	.catch(err => {
@@ -13,3 +13,6 @@ const db = () => {
 }
 
 module.exports = db;
+
+// esaproj5@gmail.com
+// ESAProject12345

@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const login = require('./routes/login.js');
+const ride = require('./routes/ride.js');
+const details = require('./routes/details.js');
+const wallet = require('./routes/wallet.js');
 const bodyParser = require('body-parser');
 const port = process.env.PORT ||  3000;
 
@@ -17,6 +20,9 @@ app.get('/', (req, res) => {
 })
 
 app.use('/login', login);
+app.use('/home', ride);
+app.use('/details', details);
+app.use('/wallet', wallet);
 
 app.listen(port, () =>{
 	console.log(`Server Running on Port ${port}`);
