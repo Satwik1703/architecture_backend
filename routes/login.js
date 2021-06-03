@@ -13,7 +13,7 @@ router.post('/signIn', (req, res) => {
 			.json("Error in Finding the User");
 			return;
 		}
-		if(docs.length == 0){
+		if(docs == null){
 			res
 			.status(400)
 			.json("Wrong Username/Password");

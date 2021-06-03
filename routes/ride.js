@@ -47,9 +47,9 @@ router.post('/startRide', (req, res) => {
   var price = 50 + time * 60 * 3;
 
   User.findOne({userId: req.body.userId}, function (err, docs) {
-    if (err || docs.length == 0) {
+    if (err || docs == null) {
       console.log(err);
-      return res.status(400).json('Error in Finding the User');
+      res.status(400).json('Error in Finding the User');
       return;
     }
     History.create({
