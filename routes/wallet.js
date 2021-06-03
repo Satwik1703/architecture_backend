@@ -10,7 +10,7 @@ router.post('/balance', (req, res) => {
 			.json("Error in Finding the User");
 			return;
 		}
-		if(docs.length == 0){
+		if(docs == null){
 			res
 			.status(202)
 			.json({

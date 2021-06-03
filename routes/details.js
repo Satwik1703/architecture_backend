@@ -5,7 +5,7 @@ const History = require('../models/History.js');
 
 router.post('/account', (req, res) => {
 	User.findOne({userId: req.body.userId}, function(err, docs){
-		if(err || docs.length == 0){
+		if(err || docs == null){
 			res
 			.status(400)
 			.json("Error in Finding the User");
@@ -30,7 +30,7 @@ router.post('/history', (req, res) => {
 			.json("Error in Finding the User");
 			return;
 		}
-		if(docs.length == 0){
+		if(docs == null){
 			res
 			.status(202)
 			.json("No Rides");
