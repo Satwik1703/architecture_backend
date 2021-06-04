@@ -5,6 +5,7 @@ const login = require('./routes/login.js');
 const ride = require('./routes/ride.js');
 const details = require('./routes/details.js');
 const wallet = require('./routes/wallet.js');
+const vehicle = require('./routes/vehicle');
 const bodyParser = require('body-parser');
 const port = process.env.PORT || 5000;
 
@@ -23,6 +24,7 @@ app.use('/login', login);
 app.use('/home', ride);
 app.use('/details', details);
 app.use('/wallet', wallet);
+app.use('/bike', vehicle);
 
 app.listen(port, () => {
   console.log(`Server Running on Port ${port}`);
