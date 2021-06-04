@@ -48,7 +48,7 @@ router.post('/startRide', async (req, res) => {
       }
       await RideCache.create({
         userId: req.body.userId,
-        vehicleid: req.body.vehicleId,
+        vehicleId: req.body.vehicleId,
         startLocation: req.body.startLocation,
       });
       res
@@ -60,7 +60,6 @@ router.post('/startRide', async (req, res) => {
 
 router.post('/getCache', async (req, res) => {
   const user = await RideCache.find({userId: req.body.userId});
-  console.log(user);
   res.status(200).json(user);
 });
 
@@ -122,13 +121,37 @@ router.post('/endRide', (req, res) => {
                 return;
               }
 
-              res.status(400).json({
-                userId: req.body.userId,
-                endLocation: loc[0],
-                distance: distance,
-                time: time,
-                price: price,
-              });
+              Vehicle.create({
+                vehicleId: req.body.vehicleId,
+                deviceId: req.body.vehicleId,
+                vehicleLocation: loc[0],
+              })
+                .then((res) => {
+                  RideCache.deleteOne(
+                    {
+                      vehicleId: req.body.vehicleId,
+                    },
+                    (err, obj) => {
+                      if (err) {
+                        res.status(400).json('Some Error with delete cache');
+                        return;
+                      }
+                    }
+                  );
+                  res.status(200).json({
+                    userId: req.body.userId,
+                    endLocation: loc[0],
+                    distance: distance,
+                    time: time,
+                    price: price,
+                  });
+                })
+                .catch((err) => {
+                  res
+                    .status(400)
+                    .json('Some Error with create vehicle at end location');
+                  return;
+                });
             }
           );
         })

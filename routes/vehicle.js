@@ -69,8 +69,7 @@ router.post('/getVehicles', (req, res) => {
         }
         res.status(200).json({
           vehicles: docs1,
-          phoneNo: docs.phoneNo,
-          cost: '50 + 3rs/min',
+          cost: '50rs + 3rs/min',
         });
       }
     );
