@@ -126,7 +126,7 @@ router.post('/endRide', (req, res) => {
                 deviceId: req.body.vehicleId,
                 vehicleLocation: loc[0],
               })
-                .then((res) => {
+                .then((response) => {
                   RideCache.deleteOne(
                     {
                       vehicleId: req.body.vehicleId,

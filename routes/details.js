@@ -26,17 +26,11 @@ router.post('/account/update', (req, res) => {
     },
     {
       username: req.body.username,
-    },
-    {
       email: req.body.email,
-    },
-    {
       phoneNo: req.body.phoneNo,
-    },
-    {
       licenseNo: req.body.licenseNo,
     },
-
+    {new: true, upsert: true, setDefaultsOnInsert: true},
     function (err, docs) {
       if (err || docs == null) {
         res.status(400).json('Error in Finding the User');
